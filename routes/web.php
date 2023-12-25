@@ -39,6 +39,11 @@ Route::get('/homeuser',[UserController::class,'index'])->name('home.home2');
 Route::get('/homeuser/details',[UserController::class,'details'])->name('home.homedonordetails');
 Route::post('/homeuser/details/registration',[UserController::class,'registrationuser'])->name('homedonordetails.registration');
 
+Route::get('/homeuser/details/login',[UserController::class,'login'])->name('homedonordetails.login');
+Route::post('/homeuser/details/login',[UserController::class,'loginuser'])->name('homedonordetails.login.user');
+
+
+
 
 
 
