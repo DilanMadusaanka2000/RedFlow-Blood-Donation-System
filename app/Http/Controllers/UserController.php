@@ -13,6 +13,7 @@ use App\Models\Bloodcapacity;
 use App\Models\Donarinformation;
 
 
+
 use App\Models\Homeuer;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
+
 
 
 
@@ -28,6 +31,23 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+  protected $donorid;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function index()
     
     {
@@ -63,7 +83,7 @@ class UserController extends Controller
 
 
        
-        return view('home.home2',$response);
+        return view('home.home2',$response);    
 
 
     }
@@ -144,12 +164,14 @@ class UserController extends Controller
         $donorid = $request->input('donorid');
         $password = $request->input('password');
     
-        // Fetch user from the database based on donorid
+        // Fetch data from the user tbl rlted donor id
         $user = DB::table('homeuers')->where('donorid', $donorid)->first();
     
         // Check if the user exists and the password matches
         if ($user && Hash::check($password, $user->password)) {
-            return view('home.donorDetails'); // Load the dashboard.blade.php file
+            //return view('home.donorDetails'); 
+            
+           return $this->search($request);
         }
     
         return redirect(route('homedonordetails.login'))->with("error", "Login fails");
@@ -157,6 +179,36 @@ class UserController extends Controller
     
 
 
-}
+
+
+
+
+
+   //private function donorinfo(){
+
+    //  $response['tasks']=$this->received->all();
+     
+     // return view('home.donorDetails')->with($response);
+//
+
+
+  //  }
+
+
+
+
+
+
+  private function search(Request $request)
+  {
+   $searchQuery = $request->input('donorid');
+   $results = Donarinformation::where('donorid','like','%' . $searchQuery . '%')->get();
+   return view('home.donorDetails',['results'=>$results]);
+
+  }
+
+
+
+} 
 
 
