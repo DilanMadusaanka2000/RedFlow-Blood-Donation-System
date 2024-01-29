@@ -118,7 +118,6 @@ class RegistrationController extends Controller
 {
     // Validate the request data first...
 
-    // Create a new registration using mass assignment
     $registrationData = $request->only([
         'fname',
         'lname',
@@ -134,13 +133,11 @@ class RegistrationController extends Controller
 
     $registration = Registration::create($registrationData);
 
-    // Dispatch the event after the registration is created
     event(new RegistrationCreated($registration));
 
     // Send registration confirmation email
     Mail::to($registration->email)->send(new RegistrationConfirmation($registration));
 
-    // Redirect or return a response as needed
 
     return view('register.reg')->with('registration', $registration);
 }
