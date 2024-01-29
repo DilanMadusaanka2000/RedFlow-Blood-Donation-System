@@ -76,7 +76,7 @@
         <td>{{ $result->address }}</td>
         <td>{{ $result->email }}</td>
         <td><a href="{{ route('update.delete',$result->id) }}" class="btn btn-danger">delete</a></td>
-        <td><a href="{{ route('update.delete',$result->id) }}" class="btn btn-success">Update</a></td>
+        <td><a href="{{ route('update.edit',$result->id) }}" class="btn btn-success">Update</a></td>
         </tr>
         @endforeach
     @endif

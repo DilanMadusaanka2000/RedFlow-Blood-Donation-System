@@ -162,6 +162,11 @@ Route::prefix('/dashboard/profile/update')->group(function() {
     Route::get('/', [UpdateController::class, 'index'])->name('update');
     Route::get('/search', [UpdateController::class, 'search'])->name('update.search');
     Route::get('/{id}/delete', [UpdateController::class, 'delete'])->name('update.delete');
+    //Route::get('/{id}/update', [UpdateController::class, 'update'])->name('update.update');
+    Route::get('/process/{id?}', [UpdateController::class, 'edit'])->name('update.edit');
+
+    Route::put('/process/{id?}', [UpdateController::class, 'processUpdate'])->name('update.process');
+
     //Route::get('/{id}/delete', [UpdateController::class, 'delete'])->name('update.delete');
 
 });

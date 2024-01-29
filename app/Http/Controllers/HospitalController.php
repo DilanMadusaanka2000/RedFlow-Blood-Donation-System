@@ -69,17 +69,17 @@ class HospitalController extends Controller
 
      $donors = Donarinformation::where('bloodGroup', $request->input('bloodtype'))->get();
  
-     // Log the number of recipients to receive the email
+
      Log::info("Number of recipients: " . count($donors));
  
      // Send emails to matching donors
      foreach ($donors as $donor) {
          $recipient = Registration::find($donor->donorid);
+         
  
-         // Check if recipient (donor) exists
          if ($recipient) {
-             // Validate the email address before sending the email
-             if (filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) {
+
+            if (filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) {
                  // Email address is valid, send the email
                  Mail::to($recipient->email)->send(new BloodRequestEmail($bloodRequest, $donor));
                  Log::info("Email sent successfully to: " . $recipient->email);
@@ -88,8 +88,7 @@ class HospitalController extends Controller
                  Log::error("Invalid email address: " . $recipient->email);
              }
          } else {
-             // Handle the case when recipient (donor) is not found
-             // For example, you can log an error or skip sending the email
+
              Log::error("Recipient not found for donor ID: " . $donor->donorid);
          }
      }
