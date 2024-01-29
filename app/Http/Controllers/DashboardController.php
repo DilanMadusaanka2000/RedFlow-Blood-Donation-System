@@ -9,6 +9,8 @@ use App\Models\Registration;
 use App\Models\Bloodcapacity;
 
 use App\Models\Donarinformation;
+use App\Models\Hospital;
+
 
 
 use Illuminate\Http\Request;
@@ -42,6 +44,7 @@ class DashboardController extends Controller
         $count = Registration::count();
         $centers = Donationcamps::count();
         $donor = Donarinformation::count();
+        $hospital = Hospital::count();
 
 
 
@@ -71,6 +74,7 @@ class DashboardController extends Controller
         $response['count'] = $count;
         $response['centers'] = $centers;
         $response['donor'] = $donor;
+        $response['hospital']=$hospital;
        // $response['aPositivePercentage'] = $aPositivePercentage;
         $response['aPositivePercentage'] = $aPositivePercentage;
 

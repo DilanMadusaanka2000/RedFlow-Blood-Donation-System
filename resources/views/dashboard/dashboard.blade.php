@@ -550,7 +550,7 @@ body {
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
+                        <div class="numbers">{{ $hospital }}</div>
                         <div class="cardName">Hospital</div>
                     </div>
 
