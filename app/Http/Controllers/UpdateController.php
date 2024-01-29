@@ -113,6 +113,7 @@ class UpdateController extends Controller
         return redirect()->route('update.search', $id)->with('success', 'Profile updated successfully!');
     }
 
+    
 
 
     public function edit($id)
